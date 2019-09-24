@@ -13,5 +13,13 @@ Database First and Entity Framework Core Migration
 
 `Visual Studio 2019(2017)` 
 
+## Run - after API starts
+`http://localhost:8800/api/patient/`
+`http://localhost:8800/api/patient/1`
+`http://localhost:8800/api/medication/`
+`http://localhost:8800/api/medication/Ultrase`
+`http://localhost:8800/api/pms/`
+`http://localhost:8800/api/pms/PMS001`
+
 
 ## Credited by MSKHackathon team Octocats
