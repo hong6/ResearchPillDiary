@@ -52,5 +52,33 @@ namespace ResearchPillDiary.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
             }
         }
+        
+        public async Task<ActionResult<PatientMedicationSchedule>> Post(PatientMedicationSchedule patientMedicationSchedule)
+        {
+            try
+            {
+                var existing = await _repository.GetPMSAsync(patientMedicationSchedule.PatientMedicationScheduleId);
+                if (existing != null)
+                {
+                    return BadRequest("PatientMedicationSchedule is alreay existing");
+                }
+
+                _repository.Add(patientMedicationSchedule);
+
+                if (await _repository.SaveChangesAsync())
+                {
+                    return Created($"/api/patientMedicationSchedule/{patientMedicationSchedule.PatientMedicationScheduleId}", patientMedicationSchedule);
+                }
+
+            }
+            catch (Exception e)
+            {
+                var msg = e.Message;
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "patientMedicationSchedule Database Failure");
+            }
+
+            return BadRequest();
+        }
+
     }
 }
