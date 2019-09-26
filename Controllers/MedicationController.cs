@@ -54,5 +54,33 @@ namespace ResearchPillDiary.Controllers
             }
         }        
 
+        public async Task<ActionResult<Medication>> Post(Medication medication)
+        {
+            try
+            {
+                var existing = await _repository.GetMedicationAsync(medication.MedicationId);
+                if (existing != null)
+                {
+                    return BadRequest("Medication is alreay existing");
+                }
+               
+                _repository.Add(medication);
+
+                if (await _repository.SaveChangesAsync())
+                {                    
+                    return Created($"/api/camps/{medication.MedicationId}", medication);
+                }
+
+            }
+            catch (Exception e)
+            {
+                var msg = e.Message;
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Database Failure");
+            }
+
+            return BadRequest();
+        }
+
+    
     }
 }
