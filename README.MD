@@ -27,4 +27,4 @@ Database First and Entity Framework Core Migration
 - `http://localhost:8800/api/pms/PMS001`
 
 
-## Credited by MSKHackathon team Octocats
+## Credited by MSKHackathon team Octocats - First Place
